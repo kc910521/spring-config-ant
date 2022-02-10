@@ -1,0 +1,10 @@
+spring:
+  config:
+    ant:
+      server:
+        host-url: http://baidu.com
+        polling:
+          path: /hb?namespace=default
+          method: GET
+      client:
+        cache-file-path: /home/work/spring_config_ant/server_data.dat
