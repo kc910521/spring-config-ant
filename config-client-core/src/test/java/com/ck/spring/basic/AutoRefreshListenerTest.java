@@ -43,4 +43,16 @@ public class AutoRefreshListenerTest {
         dep3.test();
     }
 
+
+    @Test
+    public void listenerActivationByTypeConverter() throws InterruptedException {
+        dep3.test();
+        Map<String, Object> newData = new HashMap<>();
+//        newData.put("kk", "888C");
+        newData.put("has", "happy,for,ever");
+        applicationContext.publishEvent(new ConfigMessageEvent(newData));
+        dep3.test();
+        TimeUnit.MILLISECONDS.sleep(1500);
+        dep3.test();
+    }
 }

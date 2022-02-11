@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * @Author caikun
@@ -26,6 +27,9 @@ public class Dep3 {
 
     private String rb;
 
+    @Value("${has}")
+    private List<String> happyList;
+
     @PostConstruct
     public void init2() {
         System.out.println("ss=========" + suka);
@@ -35,6 +39,7 @@ public class Dep3 {
     public void test() {
         System.out.println("test mk:" + suka);
         System.out.println("test kk:" + kk);
+        System.out.println("test happyList:" + happyList);
     }
 
 }
