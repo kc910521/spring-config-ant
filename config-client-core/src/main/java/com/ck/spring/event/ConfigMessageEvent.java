@@ -11,8 +11,9 @@ import java.util.Map;
  **/
 public class ConfigMessageEvent extends ApplicationEvent {
 
-    public ConfigMessageEvent(Object source) {
+    public ConfigMessageEvent(Map source) {
         super(source);
+        this.data = source;
     }
 
     /**
@@ -21,7 +22,7 @@ public class ConfigMessageEvent extends ApplicationEvent {
     private Map<String, Object> data;
 
     public Map<String, Object> getData() {
-        return data;
+        return this.data;
     }
 
     public void setData(Map<String, Object> data) {

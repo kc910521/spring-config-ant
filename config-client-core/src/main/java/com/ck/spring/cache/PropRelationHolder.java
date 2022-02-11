@@ -3,6 +3,9 @@ package com.ck.spring.cache;
 import com.ck.spring.define.BeanFieldsHolder;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
+
+import java.lang.reflect.Field;
 
 /**
  * @Author caikun
@@ -12,25 +15,52 @@ import com.google.common.collect.Multimap;
 public class PropRelationHolder {
 
     /**
-     * key: config namespace_key
+     * key: config key
+     * (fixme:暂时不考虑一个客户端支持多个namespace)
      * value:
+     *========================
+     * {
+     *   configKey1 --> [
+     *    {
+     *        beanObject1,
+     *        Field: [
+     *            f1,
+     *            f2
+     *        ]
+     *    }
+     *    ,{
+     *        beanObject2,
+     *        Field: [
+     *            f3
+     *        ]
+     *    }
+     *
+     *   ]
+     * }
+     *
+     *
      */
-    private static Multimap<String, BeanFieldsHolder> paramRelationMap = HashMultimap.create();
+    private static SetMultimap<String, BeanFieldsHolder> paramRelationMap = HashMultimap.create();
 
-    public static Multimap<String, BeanFieldsHolder> getParamRelationMap() {
-        return paramRelationMap;
+//    public static Multimap<String, BeanFieldsHolder> getParamRelationMap() {
+//        return paramRelationMap;
+//    }
+
+    public static void buildRelation(String key, String beanName, Object beanObject, Field valueField) {
+        BeanFieldsHolder beanFieldsHolder = new BeanFieldsHolder(beanName, beanObject, valueField);
+//        paramRelationMap.put(key, )
+        paramRelationMap.put(key, beanFieldsHolder);
+//        if (paramRelationMap.containsKey(key)) {
+//            paramRelationMap.get(key).forEach(bfh -> {
+////
+//            });
+//
+//        }
+
+
     }
 
-    public void invoke(String key, Object value) {
-        if (paramRelationMap.containsKey(key)) {
-            paramRelationMap.get(key).forEach(bfh -> {
-//                fd.setAccessible(true);
-//                // fixme: 类型转换
-//                fd.
-            });
-
-        }
-
-
+    public static SetMultimap<String, BeanFieldsHolder> getParamRelationMap() {
+        return paramRelationMap;
     }
 }

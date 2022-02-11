@@ -11,6 +11,7 @@
     <modules>
         <module>config-client-core</module>
         <module>config-client-common</module>
+        <module>object-adaptor</module>
     </modules>
 
     <dependencies>
